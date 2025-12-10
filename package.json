@@ -9,7 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "next": "16.0.6",
+    "encoding": "^0.1.13",
+    "firebase": "^12.6.0",
+    "next": "^16.0.8",
     "react": "19.2.0",
     "react-dom": "19.2.0"
   },
