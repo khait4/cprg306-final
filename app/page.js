@@ -33,7 +33,7 @@ export default function Page() {
 
           <img src={user.photoURL} alt={user.displayName} className="mx-auto rounded-full w-40 h-40 mb-6 shadow"/>
 
-          <a href="my-playlists" className="bg-purple-500 hover:bg-purple-400 text-white py-3 px-6 rounded-full text-lg shadow mb-6">
+          <a href="my-playlist" className="bg-purple-500 hover:bg-purple-400 text-white py-3 px-6 rounded-full text-lg shadow mb-6">
             Jump Into Your Playlist!
           </a>
 
