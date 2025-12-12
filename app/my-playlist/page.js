@@ -71,7 +71,7 @@ export default function Page() {
       {/* Main Content */}
       <main className="flex-1 flex flex-col lg:flex-row px-6 lg:px-16 py-10 gap-10">
         
-        {/* Left Hero */}
+        {/* Left Text */}
         <section className="flex-1 flex flex-col justify-center space-y-6">
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900">
             Build playlists in seconds,
