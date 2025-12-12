@@ -15,13 +15,15 @@ export default function Page() {
           
           {/* Logo + Brand */}
           <div className="flex items-center gap-3">
-            <Image
-              src="/logo.png"
-              width={52}
-              height={52}
-              alt="Flame logo"
-              className="rounded-2xl shadow-sm"
-            />
+            <Link href="/my-playlist">
+                <Image
+                src="/logo.png"
+                width={52}
+                height={52}
+                alt="Flame logo"
+                className="rounded-2xl shadow-sm"
+                />
+            </Link>
             <div className="leading-tight">
               <p className="text-xs uppercase tracking-[0.25em] text-amber-500 font-semibold">
                 Firebase
@@ -71,7 +73,7 @@ export default function Page() {
       {/* Main Content */}
       <main className="flex-1 flex flex-col lg:flex-row px-6 lg:px-16 py-10 gap-10">
         
-        {/* Left Hero */}
+        {/* Left Text */}
         <section className="flex-1 flex flex-col justify-center space-y-6">
           <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900">
             Build playlists in seconds,

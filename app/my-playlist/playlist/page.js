@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useUserAuth } from "../../_utils/auth-context";
-import PlaylistList from "../../components/playlist-list";
+import DisplayPlaylist from "@/app/components/displayPlaylist";
 
 
 export default function Page() {
@@ -30,7 +30,7 @@ export default function Page() {
                 Firebase
               </p>
               <h1 className="text-xl font-extrabold text-slate-900">
-                Playlists
+                Playlist
               </h1>
             </div>
           </div>  
@@ -42,13 +42,6 @@ export default function Page() {
               className="text-slate-600 hover:text-amber-600 transition"
             >
             Music Search
-            </Link>
-
-            <Link
-              href="/my-playlist/playlist"
-              className="text-slate-600 hover:text-amber-600 transition"
-            >
-            playlist
             </Link>
           </nav>
 
@@ -80,18 +73,8 @@ export default function Page() {
 
         {/* Main */}
 
-        <main>
-        <section className="flex-1 flex flex-col">
-          <div className="self-stretch rounded-3xl border border-amber-100 bg-amber-50/40 p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-slate-900 mb-4">
-              Playlists
-            </h2>
+        <DisplayPlaylist />
 
-            <PlaylistList />
-
-          </div>
-        </section>
-        </main>
 
       {/* Footer */}
       <footer className="border-t border-amber-100 py-4 text-center text-xs text-slate-500">
