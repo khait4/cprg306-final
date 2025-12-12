@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 import { useUserAuth } from "./_utils/auth-context";
+import playlistPreview from "./my-playlist/playlist-preview";
+
 
 export default function Page() {
   const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
