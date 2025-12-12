@@ -18,13 +18,17 @@ export default function Page() {
       <header className="sticky top-0 z-30 bg-white/80 backdrop-blur border-b border-amber-100">
         <div className="flex items-center justify-between px-5 lg:px-10 py-3">
           <div className="flex items-center gap-3">
-            <Image
+
+            <Link href="/my-playlist">
+              <Image
               src="/logo.png"
-              width={44}
-              height={44}
-              alt="Logo"
+              width={52}
+              height={52}
+              alt="Flame logo"
               className="rounded-2xl shadow-sm"
-            />
+              />
+            </Link>
+            
             <div className="leading-tight">
               <p className="text-xs uppercase tracking-[0.25em] text-amber-500 font-semibold">
                 Firebase

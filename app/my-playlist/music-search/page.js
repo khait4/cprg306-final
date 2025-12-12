@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import MusicSearch from "../../components/MusicSearch";
 import { useUserAuth } from "../../_utils/auth-context";
+import Link from "next/link";
 
 export default function MyPlaylistPage() {
   const { user } = useUserAuth();
@@ -12,13 +13,15 @@ export default function MyPlaylistPage() {
   if (!user) {
     return (
       <div className="min-h-screen bg-white flex flex-col items-center justify-center text-center px-6">
-        <Image
+        <Link href="/my-playlist">
+          <Image
           src="/logo.png"
-          width={90}
-          height={90}
-          alt="Logo"
-          className="rounded-2xl"
-        />
+          width={52}
+          height={52}
+          alt="Flame logo"
+          className="rounded-2xl shadow-sm"
+          />
+        </Link>
 
         <p className="text-xs uppercase text-amber-500 font-semibold mt-3">
           F i r e b a s e

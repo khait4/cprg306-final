@@ -15,13 +15,15 @@ export default function Page() {
           
           {/* Logo + Brand */}
           <div className="flex items-center gap-3">
-            <Image
-              src="/logo.png"
-              width={52}
-              height={52}
-              alt="Flame logo"
-              className="rounded-2xl shadow-sm"
-            />
+            <Link href="/my-playlist">
+                <Image
+                src="/logo.png"
+                width={52}
+                height={52}
+                alt="Flame logo"
+                className="rounded-2xl shadow-sm"
+                />
+            </Link>
             <div className="leading-tight">
               <p className="text-xs uppercase tracking-[0.25em] text-amber-500 font-semibold">
                 Firebase
