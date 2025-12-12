@@ -30,15 +30,15 @@ export default function Page() {
                 Playlist
               </h1>
             </div>
-          </div>
+          </div>  
 
           {/* Nav Links */}
           <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
             <Link
-              href="/my-playlist/playlists"
+              href="/my-playlist/music-search"
               className="text-slate-600 hover:text-amber-600 transition"
             >
-              My Playlists
+            Music Search
             </Link>
           </nav>
 
