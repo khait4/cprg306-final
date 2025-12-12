@@ -23,7 +23,7 @@ export default function Page() {
               </p>
               <h1 className="text-xl font-extrabold text-slate-900">Playlist</h1>
             </div>
-          </div>
+        </div>
     
     <main className="flex-1 flex flex-col items-center justify-center text-center px-6 py-16">
         {!user && (
