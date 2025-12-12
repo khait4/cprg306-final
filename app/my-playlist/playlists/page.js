@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useUserAuth } from "../../_utils/auth-context";
-import PlaylistList from "./playlist-list";
+import PlaylistList from "../../components/playlist-list";
 
 
 export default function Page() {
