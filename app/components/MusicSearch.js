@@ -5,47 +5,37 @@ import { useState, useEffect } from "react";
 export default function MusicSearch({ input }) {
   const [tracks, setTracks] = useState([]);
 
+  async function fetchTracks(input) {
+    if (!input?.trim()) return [];
+    try {
+      const res = await fetch(
+        `https://itunes.apple.com/search?term=${encodeURIComponent(
+          input
+        )}&media=music&limit=20`
+      );
+      const data = await res.json();
+
+      return (
+        data.results?.map((track) => ({
+          id: track.trackId,
+          name: track.trackName,
+          artist: track.artistName,
+          album: track.collectionName,
+          preview: track.previewUrl,
+        })) || []
+      );
+    } catch (err) {
+      return [];
+    }
+  }
+
+  const loadTracks = async () => {
+    const fetched = await fetchTracks(input);
+    setTracks(fetched || []);
+  };
+
   useEffect(() => {
-    let cancelled = false;
-
-    const fetchTracks = async () => {
-      if (!input?.trim()) {
-        setTracks([]);
-        return;
-      }
-
-      try {
-        const res = await fetch(
-          `https://itunes.apple.com/search?term=${encodeURIComponent(
-            input
-          )}&media=music&limit=20`
-        );
-        const data = await res.json();
-
-        const mapped =
-          data.results?.map((track) => ({
-            id: track.trackId,
-            name: track.trackName,
-            artist: track.artistName,
-            album: track.collectionName,
-            preview: track.previewUrl,
-          })) ?? [];
-
-        if (!cancelled) {
-          setTracks(mapped);
-        }
-      } catch (err) {
-        if (!cancelled) {
-          setTracks([]);
-        }
-      }
-    };
-
-    fetchTracks();
-
-    return () => {
-      cancelled = true;
-    };
+    loadTracks();
   }, [input]);
 
   if (!tracks.length) {
@@ -55,7 +45,7 @@ export default function MusicSearch({ input }) {
   return (
     <div>
       <h2 className="text-xl font-bold mb-4 text-white">
-        Music results for &quot;{input}&quot;
+        Music results for "{input}"
       </h2>
 
       <div className="grid grid-cols-2 gap-2">
