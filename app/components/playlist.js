@@ -1,7 +1,7 @@
 "use client";
 
 export default function Playlist({ playlist, onSelect }) {
-  const { name, genre, tracks } = playlist;
+  const { name, genre, trackAmount, songs } = playlist;
 
   return (
     <section onClick={() => onSelect(playlist)}>
@@ -12,7 +12,7 @@ export default function Playlist({ playlist, onSelect }) {
                 <p className="text-sm font-semibold text-slate-900">
                     {name}
                 </p>
-                <p className="text-xs text-slate-500">{tracks} tracks</p>
+                <p className="text-xs text-slate-500">{trackAmount} tracks</p>
             </div>
             <span className="rounded-full bg-amber-100 px-3 py-1 text-[11px] font-semibold text-amber-700">
                 {genre}
