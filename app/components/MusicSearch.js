@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-export default function MusicSearch({ input }) {
+export default function MusicSearch({ input, onAddTrack }) {
   const [tracks, setTracks] = useState([]);
 
   async function fetchTracks(input) {
@@ -49,19 +49,25 @@ export default function MusicSearch({ input }) {
       </h2>
 
       <div className="grid grid-cols-2 gap-2">
-        {tracks.map(({ id, name, artist, album, preview }) => (
+        {tracks.map((track) => (
           <div
-            key={id}
+            key={track.id}
             className="bg-amber-600 text-white p-2 border rounded-md text-center hover:bg-amber-700 cursor-pointer"
           >
-            <p className="font-semibold">{name}</p>
-            <p className="text-sm">{artist}</p>
-            <p className="text-xs italic">{album}</p>
-            {preview && (
+            <p className="font-semibold">{track.name}</p>
+            <p className="text-sm">{track.artist}</p>
+            <p className="text-xs italic">{track.album}</p>
+            {track.preview && (
               <audio controls className="mt-2 w-full">
-                <source src={preview} type="audio/mpeg" />
+                <source src={track.preview} type="audio/mpeg" />
               </audio>
-            )}
+            )}  
+            <button
+              onClick={() => onAddTrack(track)}
+              className="mt-2 text-xs bg-white text-amber-700 px-3 py-1 rounded-full font-semibold"
+            >
+              + Add to Playlist
+            </button>
           </div>
         ))}
       </div>

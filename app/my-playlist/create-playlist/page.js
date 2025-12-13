@@ -4,12 +4,73 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useUserAuth } from "../../_utils/auth-context";
+import MusicSearch from "../../components/MusicSearch";
+import { addPlaylist } from "../../_services/playlist-service";
 
+function DisplayPlaylist({ playlist }) {
+  const { name, genre, tracks } = playlist;
 
+  return (
+    <div className="border p-4 rounded-md mb-4">
+      <h3 className="font-bold">{name}</h3>
+      <p className="text-sm text-gray-500">{genre}</p>
+      {tracks?.length > 0 && (
+        <ul className="mt-2 list-disc list-inside">
+          {tracks.map((track) => (
+            <li key={track.id}>{track.name} — {track.artist}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 export default function Page() {
 
     const [error, setError] = useState("");
+    const [playlistName, setPlaylistName] = useState("");
+    const [genre, setGenre] = useState("");
+    const [searchInput, setSearchInput] = useState("");
+    const [tracks, setTracks] = useState([]);
+    const { user } = useUserAuth();
+    const [playlists, setPlaylists] = useState([]);
+
+    function handleAddTrack(track) {
+    if (tracks.some((t) => t.id === track.id)) return;
+    setTracks([...tracks, track]);
+  }
+
+  async function handleCreatePlaylist() {
+    if (!playlistName.trim()) {
+      setError("Playlist name is required");
+      return;
+    }
+
+    if (tracks.length === 0) {
+      setError("Add at least one song");
+      return;
+    }
+
+    setError("");
+
+    const playlist = {
+      name: playlistName,
+      genre,
+      tracks,
+    };
+
+    try {
+      const id = await addPlaylist(user.uid, playlist);
+      const newPlaylist = { ...playlist, id };
+      setPlaylists((prev) => [...prev, newPlaylist]);
+
+      setPlaylistName("");
+      setGenre("");
+      setTracks([]);
+    } catch (err) {
+      setError("Failed to create playlist");
+    }
+  } 
 
   return (
 
@@ -76,6 +137,8 @@ export default function Page() {
             <label className="block mt-4">
               <span className="text-xs font-semibold text-slate-600">Name</span>
               <input
+                value={playlistName}
+                onChange={(e) => setPlaylistName(e.target.value)}
                 placeholder="e.g., Late Night Drive"
                 className="mt-1 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-200"
               />
@@ -84,16 +147,53 @@ export default function Page() {
             <label className="block mt-4">
               <span className="text-xs font-semibold text-slate-600">Genre</span>
               <input
+                value={genre}
+                onChange={(e) => setGenre(e.target.value)}
                 placeholder="e.g., Chill / Hip-Hop / Study"
                 className="mt-1 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-200"
               />
             </label>
 
+            <button
+              onClick={handleCreatePlaylist}
+              className="mt-6 w-full rounded-2xl bg-amber-600 px-4 py-3 text-sm font-semibold text-white hover:bg-amber-700 transition"
+            >
+              Create Playlist
+            </button>
+
           </div>
         
         {/*_____________________Music search component section___________________ */}
         <div className="lg:col-span-2 rounded-3xl border border-slate-200 p-6 shadow-sm">
-            <h1 className="">Music search component section</h1>
+            <label className="block mb-4">
+              <span className="text-xs font-semibold text-slate-600">
+                Search music
+              </span>
+              <input
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                placeholder="Search for songs or artists"
+                className="mt-1 w-full rounded-2xl border border-slate-200 px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-amber-200"
+              />
+            </label>
+
+            <MusicSearch input={searchInput} onAddTrack={handleAddTrack}/>
+
+            {tracks.length > 0 && (
+              <div className="mt-6">
+                <h3 className="text-sm font-semibold text-slate-900 mb-2">
+                  Songs in playlist ({tracks.length})
+                </h3>
+
+                <ul className="space-y-2">
+                  {tracks.map((track) => (
+                    <li key={track.id} className="flex justify-between items-center rounded-xl border border-slate-200 px-4 py-2 text-sm">
+                      {track.name} — {track.artist}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
         </div>
         {/*_____________________Music search component section___________________ */}
 

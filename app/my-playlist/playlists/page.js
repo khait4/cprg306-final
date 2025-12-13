@@ -2,18 +2,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useUserAuth } from "../../_utils/auth-context";
+import DisplayPlaylist from "@/app/components/displayPlaylist";
 import PlaylistList from "../../components/playlist-list";
-
+import { useState } from "react"; 
 
 export default function Page() {
   const { firebaseSignOut } = useUserAuth();
+  const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+
+  function handleSelectPlaylist(playlist) {
+    setSelectedPlaylist(playlist);
+  }
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Top Bar / Header */}
       <header className="sticky top-0 z-30 bg-white/80 backdrop-blur border-b border-amber-100">
         <div className="flex items-center justify-between px-5 lg:px-10 py-3">
-          
+         
           {/* Logo + Brand */}
           <div className="flex items-center gap-3">
             <Link href="/my-playlist">
@@ -30,27 +36,20 @@ export default function Page() {
                 Firebase
               </p>
               <h1 className="text-xl font-extrabold text-slate-900">
-                Playlists
+                Playlist
               </h1>
             </div>
           </div>  
 
           {/* Nav Links */}
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
             <Link
               href="/my-playlist/music-search"
               className="text-slate-600 hover:text-amber-600 transition"
             >
             Music Search
             </Link>
-
-            <Link
-              href="/my-playlist/playlist"
-              className="text-slate-600 hover:text-amber-600 transition"
-            >
-            playlist
-            </Link>
-          </nav>
+        </nav>
 
           {/* Actions */}
           <div className="flex items-center gap-2">
@@ -78,20 +77,17 @@ export default function Page() {
         </div>
       </header>
 
-        {/* Main */}
-
-        <main>
+      {/* Main */}
+      <main>
         <section className="flex-1 flex flex-col">
-          <div className="self-stretch rounded-3xl border border-amber-100 bg-amber-50/40 p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-slate-900 mb-4">
-              Playlists
-            </h2>
-
-            <PlaylistList />
-
-          </div>
+            <div className="self-stretch rounded-3xl border border-amber-100 bg-amber-50/40 p-6 shadow-sm">
+                <h2 className="text-lg font-semibold text-slate-900 mb-4">
+                    Playlists
+                </h2>
+                <PlaylistList onItemSelect={handleSelectPlaylist} />
+            </div>
         </section>
-        </main>
+      </main>
 
       {/* Footer */}
       <footer className="border-t border-amber-100 py-4 text-center text-xs text-slate-500">
