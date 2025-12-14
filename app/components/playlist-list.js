@@ -5,7 +5,7 @@ import { useUserAuth } from "../_utils/auth-context";
 import { getPlaylists } from "../_services/playlist-service"; 
 import { useEffect, useState } from "react"; 
 
-export default function PlaylistList({ onItemSelect }){
+export default function PlaylistList(){
 
     const { user } = useUserAuth(); 
     const [playlists, setPlaylists] = useState([]); 
@@ -25,7 +25,7 @@ export default function PlaylistList({ onItemSelect }){
         <div>
             <div>
                 {playlists.map((playlist) => (
-                    <Playlist key={playlist.id} playlist={playlist} onSelect={() => onItemSelect(playlist)} />
+                    <Playlist key={playlist.id} playlist={playlist}/>
                 ))}
             </div>
         </div>

@@ -2,17 +2,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useUserAuth } from "../../_utils/auth-context";
-import DisplayPlaylist from "@/app/components/displayPlaylist";
 import PlaylistList from "../../components/playlist-list";
-import { useState } from "react"; 
 
 export default function Page() {
   const { firebaseSignOut } = useUserAuth();
-  const [selectedPlaylist, setSelectedPlaylist] = useState(null);
-
-  function handleSelectPlaylist(playlist) {
-    setSelectedPlaylist(playlist);
-  }
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
@@ -78,15 +71,8 @@ export default function Page() {
       </header>
 
       {/* Main */}
-      <main>
-        <section className="flex-1 flex flex-col">
-            <div className="self-stretch rounded-3xl border border-amber-100 bg-amber-50/40 p-6 shadow-sm">
-                <h2 className="text-lg font-semibold text-slate-900 mb-4">
-                    Playlists
-                </h2>
-                <PlaylistList onItemSelect={handleSelectPlaylist} />
-            </div>
-        </section>
+      <main className="self-stretch rounded-3xl border border-amber-100 bg-amber-50/40 p-6 shadow-sm">
+        <PlaylistList />
       </main>
 
       {/* Footer */}

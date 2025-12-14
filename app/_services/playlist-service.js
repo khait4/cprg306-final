@@ -1,5 +1,5 @@
 import { db } from "../_utils/firebase";
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, doc, getDoc } from "firebase/firestore";
 
 export async function getPlaylists(userId) {
     
@@ -21,4 +21,16 @@ export async function addPlaylist(userId, playlist) {
     const docRef = await addDoc(playlistsRef, playlist)
 
     return docRef.id;
+}
+
+export async function getPlaylist(userId, playlistId) {
+  const playlistRef = doc(db, "users", userId, "playlists", playlistId);
+  const snapshot = await getDoc(playlistRef);
+
+  if (!snapshot.exists()) return null;
+
+  return {
+    id: snapshot.id,
+    ...snapshot.data(),
+  };
 }
