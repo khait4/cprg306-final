@@ -34,16 +34,6 @@ export default function Page() {
             </div>
           </div>  
 
-          {/* Nav Links */}
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-            <Link
-              href="/my-playlist/music-search"
-              className="text-slate-600 hover:text-amber-600 transition"
-            >
-            Music Search
-            </Link>
-          </nav>
-
           {/* Actions */}
           <div className="flex items-center gap-2">
             <button

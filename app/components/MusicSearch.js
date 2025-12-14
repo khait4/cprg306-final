@@ -50,10 +50,7 @@ export default function MusicSearch({ input, onAddTrack }) {
 
       <div className="grid grid-cols-2 gap-2">
         {tracks.map((track) => (
-          <div
-            key={track.id}
-            className="bg-amber-600 text-white p-2 border rounded-md text-center hover:bg-amber-700 cursor-pointer"
-          >
+          <div key={track.id} className="bg-amber-600 text-white p-2 border rounded-md text-center hover:bg-amber-700 cursor-pointer">
             <p className="font-semibold">{track.name}</p>
             <p className="text-sm">{track.artist}</p>
             <p className="text-xs italic">{track.album}</p>
@@ -62,10 +59,7 @@ export default function MusicSearch({ input, onAddTrack }) {
                 <source src={track.preview} type="audio/mpeg" />
               </audio>
             )}  
-            <button
-              onClick={() => onAddTrack(track)}
-              className="mt-2 text-xs bg-white text-amber-700 px-3 py-1 rounded-full font-semibold"
-            >
+            <button onClick={() => onAddTrack(track)} className="mt-2 text-xs bg-white text-amber-700 px-3 py-1 rounded-full hover:bg-amber-400">
               + Add to Playlist
             </button>
           </div>

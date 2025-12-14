@@ -26,8 +26,11 @@ export default function Page() {
         fetchPlaylist();
     }, [user, playlistId]);
     
-    if (loading) return <div className="p-6">Loading playlist...</div>;
-    if (!playlist) return <div className="p-6">Playlist not found.</div>;
+    if (loading) 
+        return <div className="p-6">Loading playlist...</div>;
+    
+    if (!playlist) 
+        return <div className="p-6">Playlist not found.</div>;
     
     return (
     <main className="p-6 max-w-3xl mx-auto">
