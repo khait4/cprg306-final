@@ -1,6 +1,7 @@
 "use client";
+import MusicSearch from "./MusicSearch";
 
-export default function DisplayPlaylist({ playlist }) {
+export default function DisplayPlaylist({ playlist, onAddTrack, onRemoveTrack }) {
 
     if (!playlist) {
         return (
@@ -23,11 +24,28 @@ export default function DisplayPlaylist({ playlist }) {
         <ul className="space-y-2">
             {tracks.map((track) => (
                 <li key={track.id} className="rounded-xl border border-slate-200 px-4 py-2 text-sm">
-                    {track.name} — {track.artist}
+                    <div>
+                        {track.name} — {track.artist}
+                    </div>
+                    
+                    {onRemoveTrack && (
+                        <button onClick={() => onRemoveTrack(track.id)} className="text-red-600 text-xs px-2 py-1 rounded hover:bg-red-100">
+                            Remove
+                        </button>
+                    )}
                 </li>
             ))}
         </ul>
       )}
+      {onAddTrack && (
+        <div className="mt-6">
+            <h3 className="text-sm font-semibold text-slate-900 mb-2">
+                Add Songs
+            </h3>
+            
+            <MusicSearch input="" onAddTrack={onAddTrack}/>
+        </div>
+    )}
     </div>
-  );
+    );
 }

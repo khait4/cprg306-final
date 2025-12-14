@@ -1,5 +1,5 @@
 import { db } from "../_utils/firebase";
-import { collection, getDocs, addDoc, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 
 export async function getPlaylists(userId) {
     
@@ -33,4 +33,9 @@ export async function getPlaylist(userId, playlistId) {
     id: snapshot.id,
     ...snapshot.data(),
   };
+}
+
+export async function updatePlaylist(userId, playlistId, updatedData) {
+  const playlistRef = doc(db, "users", userId, "playlists", playlistId);
+  await updateDoc(playlistRef, updatedData);
 }
