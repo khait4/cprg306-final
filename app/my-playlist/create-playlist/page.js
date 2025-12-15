@@ -7,24 +7,6 @@ import { useUserAuth } from "../../_utils/auth-context";
 import MusicSearch from "../../components/MusicSearch";
 import { addPlaylist } from "../../_services/playlist-service";
 
-function DisplayPlaylist({ playlist }) {
-  const { name, genre, tracks } = playlist;
-
-  return (
-    <div className="border p-4 rounded-md mb-4">
-      <h3 className="font-bold">{name}</h3>
-      <p className="text-sm text-gray-500">{genre}</p>
-      {tracks?.length > 0 && (
-        <ul className="mt-2 list-disc list-inside">
-          {tracks.map((track) => (
-            <li key={track.id}>{track.name} — {track.artist}</li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
 export default function Page() {
 
     const [error, setError] = useState("");
